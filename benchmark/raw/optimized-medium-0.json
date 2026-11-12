@@ -1,0 +1,17 @@
+{
+ "impl": "optimized",
+ "scale": "medium",
+ "sample": 0,
+ "seconds": 0.023910917341709137,
+ "warmup": 3,
+ "reps": 7,
+ "src": "ec2-2016-04-01.json",
+ "dst": "ec2-2016-09-15.json",
+ "src_bytes": 878250,
+ "dst_bytes": 891280,
+ "src_sha256": "6065fd53c26f0235872d99ce369b89172349e6c3048a50a2bbd03ca0f26a0353",
+ "dst_sha256": "e347b8ee1db56518d90f1ffc826de7513f0bafd1b7d669f2003301791f843e89",
+ "ops": 52,
+ "patch_sha256": "06133e2c8cc3fcc8cc1fec7150c92ce5a42475bdff2d238639d0db955a070070",
+ "applies": true
+}

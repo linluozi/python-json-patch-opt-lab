@@ -1,0 +1,9 @@
+[project]
+name = "jsonpatch-opt-lab"
+version = "0.1.0"
+description = "Semantics-preserving fast paths for jsonpatch.JsonPatch.from_diff"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

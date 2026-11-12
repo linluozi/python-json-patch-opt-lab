@@ -1,0 +1,89 @@
+--- a/jsonpatch.py
++++ b/jsonpatch.py
+@@ -1055,7 +1055,7 @@
+                               optimization=optimization,
+                               generate_test_ops=generate_test_ops)
+         builder._compare_values((), None, src, dst)
+-        ops = copy.deepcopy(list(builder.execute()))
++        ops = _copy_json(list(builder.execute()))
+         return cls(ops, pointer_cls=pointer_cls)
+ 
+     def to_string(self, dumps=None):
+@@ -1175,7 +1175,7 @@
+                                      optimization=optimization,
+                                      generate_test_ops=generate_test_ops)
+         builder._compare_values((), None, src, dst)
+-        ops = copy.deepcopy(list(builder.execute()))
++        ops = _copy_json(list(builder.execute()))
+         return cls(ops, pointer_cls=pointer_cls)
+ 
+ 
+@@ -1512,7 +1512,14 @@
+                 self._item_added(path, key, dst[key])
+ 
+     def _compare_values(self, path, key, src, dst):
+-        if isinstance(src, MutableMapping) and \
++        st, dt = type(src), type(dst)
++        if st is dict and dt is dict:
++            self._compare_dicts(_path_join(path, key), src, dst)
++
++        elif st is list and dt is list:
++            self._compare_lists(_path_join(path, key), src, dst)
++
++        elif isinstance(src, MutableMapping) and \
+                 isinstance(dst, MutableMapping):
+             self._compare_dicts(_path_join(path, key), src, dst)
+ 
+@@ -1548,6 +1555,41 @@
+             super()._item_replaced(path, key, item, old_item)
+ 
+ 
++def _copy_json(value, memo=None):
++    """ copy.deepcopy for JSON documents, falling back for other objects """
++    if value is None:
++        return value
++    t = type(value)
++    if t is str or t is int or t is bool or t is float:
++        return value
++    if memo is None:
++        memo = {}
++    vid = id(value)
++    copied = memo.get(vid)
++    if copied is not None:
++        return copied
++    if t is dict:
++        copied = {}
++        memo[vid] = copied
++        for key, item in value.items():
++            kt = type(key)
++            if not (kt is str or kt is int or kt is bool or kt is float):
++                key = _copy_json(key, memo)
++            copied[key] = _copy_json(item, memo)
++        return copied
++    if t is list:
++        copied = []
++        memo[vid] = copied
++        for item in value:
++            copied.append(_copy_json(item, memo))
++        return copied
++    if t is tuple:
++        copied = tuple(_copy_json(item, memo) for item in value)
++        memo[vid] = copied
++        return copied
++    return copy.deepcopy(value, memo)
++
++
+ def _positional_cost(old, new):
+     """ Estimates how many operations change old into new, if the items of
+     arrays are compared by position """
+@@ -1587,6 +1629,10 @@
+     # Most values are scalars, so they are checked for first
+     if value is None or isinstance(value, (str, int, float)):
+         return value
++    if type(value) is dict:
++        return {key: _sorted_members(value[key]) for key in sorted(value)}
++    if type(value) is list:
++        return [_sorted_members(item) for item in value]
+     if isinstance(value, MutableMapping):
+         return {key: _sorted_members(value[key]) for key in sorted(value)}
+     if isinstance(value, MutableSequence):

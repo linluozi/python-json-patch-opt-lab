@@ -1,0 +1,79 @@
+{
+ "environment": {
+  "cpu": "AMD EPYC 7K62 48-Core Processor",
+  "mem_total_kb": 3812564,
+  "cores": 4,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "python_executable": "/tmp/venv/bin/python",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "warmup": 3,
+  "reps": 7,
+  "timer": "time.perf_counter",
+  "seed": null,
+  "seed_note": "benchmark is deterministic; no random input is generated",
+  "command": "python3 benchmark/bench.py"
+ },
+ "samples": 21,
+ "scales": {
+  "small": {
+   "n": 7,
+   "median_s": 0.06782684195786715,
+   "p25_s": 0.0674049686640501,
+   "p75_s": 0.0679957689717412,
+   "min_s": 0.06717763096094131,
+   "max_s": 0.07366667035967112,
+   "mean_s": 0.06853311495589358,
+   "rsd_pct": 3.082525565794393,
+   "src_bytes": 326067,
+   "dst_bytes": 1087567,
+   "ops": 2412,
+   "patch_sha256": "e039026ce6d9f2e0bd5a6d64ad34c9df44e9805c9fe5ae6cc2448b5875a9154c",
+   "applies": true
+  },
+  "medium": {
+   "n": 7,
+   "median_s": 0.02822251245379448,
+   "p25_s": 0.028167017735540867,
+   "p75_s": 0.028499173931777477,
+   "min_s": 0.028144615702331066,
+   "max_s": 0.02877866942435503,
+   "mean_s": 0.028343192700828825,
+   "rsd_pct": 0.7509631644825975,
+   "src_bytes": 326067,
+   "dst_bytes": 1087567,
+   "ops": 52,
+   "patch_sha256": "06133e2c8cc3fcc8cc1fec7150c92ce5a42475bdff2d238639d0db955a070070",
+   "applies": true
+  },
+  "large": {
+   "n": 7,
+   "median_s": 0.19907952193170786,
+   "p25_s": 0.1871098717674613,
+   "p75_s": 0.20308512169867754,
+   "min_s": 0.18533331248909235,
+   "max_s": 0.20353426691144705,
+   "mean_s": 0.19527931870626553,
+   "rsd_pct": 3.8443004072810765,
+   "src_bytes": 326067,
+   "dst_bytes": 1087567,
+   "ops": 5770,
+   "patch_sha256": "9cf840e055b51c3553f2aa8797c160996a32511d7dfeb7496b9222f99f93d39a",
+   "applies": true
+  }
+ },
+ "memory": {
+  "small": {
+   "ops": 2412,
+   "peak_rss_kb": 52336
+  },
+  "medium": {
+   "ops": 52,
+   "peak_rss_kb": 52336
+  },
+  "large": {
+   "ops": 5770,
+   "peak_rss_kb": 52336
+  }
+ },
+ "implementation": "/home/ubuntu/GitHub/work/algo/jsonpatch-opt-lab/baseline_src/jsonpatch.py"
+}

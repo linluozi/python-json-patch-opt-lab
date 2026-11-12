@@ -1,0 +1,17 @@
+{
+ "impl": "optimized",
+ "scale": "small",
+ "sample": 5,
+ "seconds": 0.055886986665427685,
+ "warmup": 3,
+ "reps": 7,
+ "src": "rds-2014-09-01.json",
+ "dst": "rds-2014-10-31.json",
+ "src_bytes": 326067,
+ "dst_bytes": 1087567,
+ "src_sha256": "c0d35cf35355573614ba6b34f3f058e31d96622ef0ec28204c05cf66442e4265",
+ "dst_sha256": "26814905a74b7054402c3ee09f031b4da5cfcab172ace40ab7c693cd8076e15b",
+ "ops": 2412,
+ "patch_sha256": "e039026ce6d9f2e0bd5a6d64ad34c9df44e9805c9fe5ae6cc2448b5875a9154c",
+ "applies": true
+}
